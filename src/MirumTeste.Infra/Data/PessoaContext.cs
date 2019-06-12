@@ -30,6 +30,12 @@ namespace MirumTeste.Infra.Data
 
             modelBuilder.Entity<Cargo>().Property(e => e.Funcao)
                 .HasColumnType("varchar(30)");
+
+
+            modelBuilder.Entity<Menu>()
+                .HasMany(c => c.subMenu)
+                .WithOne();
+
         }
     }
 }
