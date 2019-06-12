@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <UserSecretsId>aspnet-MirumTeste.UI.Web-7B568B69-B761-401C-88E8-5E4D9D44B614</UserSecretsId>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\MirumTeste.ApplicationCore\MirumTeste.ApplicationCore.csproj" />
+    <ProjectReference Include="..\MirumTeste.Infra\MirumTeste.Infra.csproj" />
+  </ItemGroup>
+
+</Project>
