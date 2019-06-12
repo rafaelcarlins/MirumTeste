@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MirumTeste.Infra.Data;
 
 namespace MirumTeste.Infra.Migrations
 {
     [DbContext(typeof(PessoaContext))]
-    partial class PessoaContextModelSnapshot : ModelSnapshot
+    [Migration("20190612180634_AddCargo")]
+    partial class AddCargo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,8 +27,7 @@ namespace MirumTeste.Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Funcao")
-                        .HasColumnType("varchar(30)");
+                    b.Property<string>("Funcao");
 
                     b.Property<int>("IdPessoa");
 
@@ -47,11 +48,9 @@ namespace MirumTeste.Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Email")
-                        .HasColumnType("varchar(80)");
+                    b.Property<string>("Email");
 
-                    b.Property<string>("Nome")
-                        .HasColumnType("varchar(80)");
+                    b.Property<string>("Nome");
 
                     b.Property<int>("Rg");
 

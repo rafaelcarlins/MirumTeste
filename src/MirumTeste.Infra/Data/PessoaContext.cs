@@ -14,10 +14,22 @@ namespace MirumTeste.Infra.Data
         }
 
         public DbSet<Pessoa> Pessoas { get; set; }
+        public DbSet<Cargo> Cargos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Pessoa>().ToTable("Pessoa");
+            modelBuilder.Entity<Cargo>().ToTable("Cargo");
+
+
+            modelBuilder.Entity<Pessoa>().Property(e => e.Nome)
+                .HasColumnType("varchar(80)");
+
+            modelBuilder.Entity<Pessoa>().Property(e => e.Email)
+                .HasColumnType("varchar(80)");
+
+            modelBuilder.Entity<Cargo>().Property(e => e.Funcao)
+                .HasColumnType("varchar(30)");
         }
     }
 }
