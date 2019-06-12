@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using MirumTeste.UI.Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MirumTeste.Infra.Data;
 
 namespace MirumTeste.UI.Web
 {
@@ -34,6 +35,9 @@ namespace MirumTeste.UI.Web
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            services.AddDbContext<PessoaContext>(options => 
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
