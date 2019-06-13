@@ -6,7 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\src\MirumTeste.ApplicationCore\MirumTeste.ApplicationCore.csproj" />
+    <ProjectReference Include="..\src\MirumTeste.UI.Web\MirumTeste.UI.Web.csproj" />
   </ItemGroup>
 
 </Project>

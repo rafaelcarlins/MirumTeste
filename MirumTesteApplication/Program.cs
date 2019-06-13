@@ -1,5 +1,5 @@
 ﻿using System;
-using MirumTeste.ApplicationCore;
+using MirumTeste.UI;
 
 namespace MirumTesteApplication
 {
@@ -7,8 +7,10 @@ namespace MirumTesteApplication
     {
         static void Main(string[] args)
         {
-
-            Console.WriteLine("Hello World!");
+            MirumTeste.UI.Web.Controllers.HomeController homeController = new MirumTeste.UI.Web.Controllers.HomeController() ;
+            int a = homeController.Teste();
+            Console.WriteLine(a);
+            Console.Read();
         }
     }
 }

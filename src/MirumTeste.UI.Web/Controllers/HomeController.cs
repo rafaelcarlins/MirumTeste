@@ -10,6 +10,11 @@ namespace MirumTeste.UI.Web.Controllers
 {
     public class HomeController : Controller
     {
+
+        public int Teste()
+        {
+            return 1;
+        }
         public IActionResult Index()
         {
             return View();
