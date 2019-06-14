@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MirumTeste.ApplicationCore.Entity;
 using MirumTeste.ApplicationCore.Interface.Repository;
 using MirumTeste.Infra.Data;
 using System;
@@ -32,6 +33,15 @@ namespace MirumTeste.Infra.Repository
 
         public IEnumerable<TEntity> ObterTodos()
         {
+            // var entryPoint = (from p in _dbContext.Pessoas
+            //                  join c in _dbContext.Cargos on p.Id equals c.IdPessoa
+            //                  select new
+            //                  {
+            //                      c.Pessoas,
+            //                      c.Funcao
+            //                  }).ToList();
+            //return entryPoint;
+
             return _dbContext.Set<TEntity>().AsEnumerable();
         }
 

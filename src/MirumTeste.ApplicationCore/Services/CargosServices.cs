@@ -1,4 +1,5 @@
 ﻿using MirumTeste.ApplicationCore.Entity;
+using MirumTeste.ApplicationCore.Interface.Repository;
 using MirumTeste.ApplicationCore.Interface.Services;
 using System;
 using System.Collections.Generic;
@@ -9,14 +10,19 @@ namespace MirumTeste.ApplicationCore.Services
 {
     public class CargosServices : ICargoServices
     {
-        public Pessoa Adicionar(Cargo entity)
+        private readonly ICargoRepository _repository;
+        public CargosServices(ICargoRepository repository)
         {
-            throw new NotImplementedException();
+            _repository = repository;
+        }
+        public Cargo Adicionar(Cargo entity)
+        {
+            return _repository.Adicionar(entity);
         }
 
         public void Atualizar(Cargo entity)
         {
-            throw new NotImplementedException();
+            _repository.Atualizar(entity);
         }
 
         public IEnumerable<Cargo> Find(Expression<Func<Cargo, bool>> predicate)
@@ -26,17 +32,17 @@ namespace MirumTeste.ApplicationCore.Services
 
         public IEnumerable<Cargo> ObterTodos()
         {
-            throw new NotImplementedException();
+            return _repository.ObterTodos();
         }
 
-        public Cargo ObterUnico(int Id)
+        public Cargo ObterUnico(int? Id)
         {
-            throw new NotImplementedException();
+            return _repository.ObterUnico(Id);
         }
 
         public void Remover(Cargo entity)
         {
-            throw new NotImplementedException();
+            _repository.Remover(entity);
         }
     }
 }

@@ -45,6 +45,7 @@ namespace MirumTeste.UI.Web
             services.AddDbContext<ApplicationDbContext>(options =>options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>().AddDefaultUI(UIFramework.Bootstrap4).AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddScoped<IPessoaRepository, PessoaRepository>();
+            services.AddScoped<ICargoRepository, CargoRepository>();
             services.AddScoped<IPessoaServices, PessoasServices>();
             services.AddScoped<ICargoServices, CargosServices>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

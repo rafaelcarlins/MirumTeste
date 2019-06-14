@@ -12,10 +12,13 @@
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Funcao)
-                </th>
-                
+            <th>
+                @Html.DisplayNameFor(model => model.Funcao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SalarioBase)
+            </th>
+
             <th></th>
         </tr>
     </thead>
@@ -25,11 +28,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Funcao)
             </td>
-            
             <td>
-                @*<a asp-action="Edit" asp-route-id="@item.ContatoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ContatoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ContatoId">Delete</a>*@
+                @Html.DisplayFor(modelItem => item.SalarioBase)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
