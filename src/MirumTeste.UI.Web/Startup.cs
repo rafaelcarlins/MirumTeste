@@ -14,6 +14,10 @@ using MirumTeste.UI.Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MirumTeste.Infra.Data;
+using MirumTeste.ApplicationCore.Interface.Repository;
+using MirumTeste.ApplicationCore.Services;
+using MirumTeste.ApplicationCore.Interface.Services;
+using MirumTeste.Infra.Repository;
 
 namespace MirumTeste.UI.Web
 {
@@ -36,16 +40,13 @@ namespace MirumTeste.UI.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<PessoaContext>(options => 
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<PessoaContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-
+            services.AddDbContext<ApplicationDbContext>(options =>options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDefaultIdentity<IdentityUser>().AddDefaultUI(UIFramework.Bootstrap4).AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddScoped<IPessoaRepository, PessoaRepository>();
+            services.AddScoped<IPessoaServices, PessoasServices>();
+            services.AddScoped<ICargoServices, CargosServices>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 using MirumTeste.ApplicationCore.Entity;
+using MirumTeste.ApplicationCore.Interface;
 using MirumTeste.ApplicationCore.Interface.Repository;
+using MirumTeste.ApplicationCore.Interface.Services;
+using MirumTeste.ApplicationCore.Services;
 
 namespace MirumTeste.ApplicationCore.Services
 {
     public class PessoasServices : IPessoaServices
     {
-        private readonly IRepository<Pessoa> _repository;
-        public PessoasServices(IRepository<Pessoa> repository)
+        private readonly IPessoaRepository _repository;
+        public PessoasServices(IPessoaRepository repository)
         {
             _repository = repository;
         }
@@ -28,7 +31,7 @@ namespace MirumTeste.ApplicationCore.Services
             return _repository.ObterTodos();
         }
 
-        public Pessoa ObterUnico(int Id)
+        public Pessoa ObterUnico(int? Id)
         {
             return _repository.ObterUnico(Id);
         }

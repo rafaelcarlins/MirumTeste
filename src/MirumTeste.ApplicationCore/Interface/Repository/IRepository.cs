@@ -9,7 +9,7 @@ namespace MirumTeste.ApplicationCore.Interface.Repository
         TEntity Adicionar(TEntity entity);
         void Atualizar(TEntity entity);
         IEnumerable<TEntity>ObterTodos();
-        TEntity ObterUnico(int Id);
+        TEntity ObterUnico(int? Id);
         void Remover(TEntity entity);
     }
 }

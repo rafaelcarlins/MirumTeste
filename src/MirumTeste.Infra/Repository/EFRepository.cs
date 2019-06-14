@@ -35,7 +35,7 @@ namespace MirumTeste.Infra.Repository
             return _dbContext.Set<TEntity>().AsEnumerable();
         }
 
-        public TEntity ObterUnico(int Id)
+        public TEntity ObterUnico(int? Id)
         {
             return _dbContext.Set<TEntity>().Find(Id);
         }

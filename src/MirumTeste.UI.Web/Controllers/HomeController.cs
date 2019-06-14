@@ -5,16 +5,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MirumTeste.UI.Web.Models;
+using MirumTeste.ApplicationCore.Services;
+using MirumTeste.ApplicationCore.Entity;
+using MirumTeste.ApplicationCore.Interface.Repository;
 
 namespace MirumTeste.UI.Web.Controllers
 {
     public class HomeController : Controller
     {
-
-        public int Teste()
-        {
-            return 1;
-        }
+       
         public IActionResult Index()
         {
             return View();
@@ -22,6 +21,7 @@ namespace MirumTeste.UI.Web.Controllers
 
         public IActionResult Privacy()
         {
+
             return View();
         }
 
