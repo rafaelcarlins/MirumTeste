@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MirumTeste.Infra.Data;
 
 namespace MirumTeste.Infra.Migrations
 {
     [DbContext(typeof(PessoaContext))]
-    partial class PessoaContextModelSnapshot : ModelSnapshot
+    [Migration("20190615141357_Teste")]
+    partial class Teste
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,6 +29,8 @@ namespace MirumTeste.Infra.Migrations
 
                     b.Property<string>("Funcao")
                         .HasColumnType("varchar(30)");
+
+                    b.Property<int>("IdPessoa");
 
                     b.Property<int?>("PessoaId");
 
@@ -62,10 +66,10 @@ namespace MirumTeste.Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CargoId");
-
                     b.Property<string>("Email")
                         .HasColumnType("varchar(80)");
+
+                    b.Property<int>("IdCargo");
 
                     b.Property<string>("Nome")
                         .HasColumnType("varchar(80)");
@@ -74,14 +78,12 @@ namespace MirumTeste.Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CargoId");
-
                     b.ToTable("Pessoa");
                 });
 
             modelBuilder.Entity("MirumTeste.ApplicationCore.Entity.Cargo", b =>
                 {
-                    b.HasOne("MirumTeste.ApplicationCore.Entity.Pessoa")
+                    b.HasOne("MirumTeste.ApplicationCore.Entity.Pessoa", "Pessoa")
                         .WithMany("Cargos")
                         .HasForeignKey("PessoaId");
                 });
@@ -91,13 +93,6 @@ namespace MirumTeste.Infra.Migrations
                     b.HasOne("MirumTeste.ApplicationCore.Entity.Menu")
                         .WithMany("subMenu")
                         .HasForeignKey("MenuId");
-                });
-
-            modelBuilder.Entity("MirumTeste.ApplicationCore.Entity.Pessoa", b =>
-                {
-                    b.HasOne("MirumTeste.ApplicationCore.Entity.Cargo", "Cargo")
-                        .WithMany()
-                        .HasForeignKey("CargoId");
                 });
 #pragma warning restore 612, 618
         }

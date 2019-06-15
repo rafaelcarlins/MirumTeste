@@ -14,8 +14,8 @@ namespace MirumTeste.ApplicationCore.Entity
         public int Id { get; set; }
         public string Funcao { get; set; }
         public decimal SalarioBase { get; set; }
-        public int IdPessoa { get; set; }
-        public Pessoa Pessoa { get; set; }
+        //public int IdPessoa { get; set; }
+        //public Pessoa Pessoa { get; set; }
 
     }
 }

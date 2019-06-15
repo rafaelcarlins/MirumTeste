@@ -16,5 +16,6 @@ namespace MirumTeste.ApplicationCore.Entity
         public int Rg { get; set; }
         public string Email { get; set; }
         public  ICollection<Cargo> Cargos { get; set; }
+        public  Cargo  Cargo{ get; set; }
     }
 }

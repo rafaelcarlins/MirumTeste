@@ -15,28 +15,38 @@
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
                 <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Rg" class="control-label"></label>
                 <input asp-for="Rg" class="form-control" />
-                <span asp-validation-for="Rg" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 
-            <div>
-                <select>
-                    <option value="1">Nome</option>
-                    <option value="2">Nome</option>
-                    <option value="3">Nome</option>
-                </select>
+            <div class="form-group">
+
+                @*@Html.LabelFor(m => m.Cargos)
+                @Html.DropDownListFor(m => m.Cargos, // 1. Store selected value in Model.State;
+                                                    // when page is rendered after postback,
+                                                    // take selected value from Model.State.
+
+                                      // 2. Take list of values from Model.States
+                                      Model.Cargos,
+
+                                      // 3. Text for the first 'default' option
+                                      "- Please select a state -",
+
+                                      //4. A class name to assign to <select> tag
+                                      new { @class = "form-control" })*@
+                @*<select asp-for="Cargos" asp-items="@Model.Cargos">
+            <option>Please select one</option>
+        </select>*@
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>

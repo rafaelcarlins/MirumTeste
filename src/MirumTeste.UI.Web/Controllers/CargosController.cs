@@ -23,6 +23,11 @@ namespace MirumTeste.UI.Web.Controllers
             return View(_cargoService.ObterTodos());
         }
 
+        //public IActionResult Find()
+        //{
+        //    return View(_cargoService.Find(x => x.IdPessoa == 1));
+        //}
+
         public IActionResult Create()
         {
             return View();
@@ -31,6 +36,7 @@ namespace MirumTeste.UI.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Funcao, SalarioBase")] Cargo cargo)
         {
+            
             if (ModelState.IsValid)
             {
                 _cargoService.Adicionar(cargo);

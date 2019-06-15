@@ -22,9 +22,22 @@ namespace MirumTeste.UI.Web.Controllers
         }
         public IActionResult Index()
         {
-            return View(_pessoaService.ObterTodos());
-        }
 
+            _pessoaService.ObterTodos();
+
+            //foreach (Cargo element in _pessoaService.ObterTodos())
+            //{
+            //    var selectList = new List<SelectListItem>();
+            //    selectList.Add(new SelectListItem
+            //    {
+            //        Value = element.Cargos.ToString(),
+            //        Text = element.Cargos.ToString()
+            //    });
+            //}
+
+            return View();
+        }
+        
         public IActionResult Create()
         {
             return View();
