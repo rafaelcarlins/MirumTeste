@@ -36,15 +36,36 @@ namespace MirumTeste.Infra.Repository
             return _dbContext.Set<TEntity>().AsEnumerable();
         }
 
+        public IEnumerable<CargoPessoa> ObterTodosComCargo()
+        {
+            var aluno = (from p in _dbContext.Pessoas
+                         join c in _dbContext.Cargos on p.CargoId equals c.Id
+                         select new CargoPessoa
+                         {
+                             Nome = p.Nome,
+                             Funcao = c.Funcao,
+                             SalarioBase = c.SalarioBase,
+                         }).ToList();
+            return (aluno);
+        }
 
-
-        //public IEnumerable<Cargo> ObterTodosComCargos()
+        public IEnumerable<CargoPessoa> ObterTodosComCargoParametro(int Id)
+        {
+            var aluno = (from p in _dbContext.Pessoas
+                         join c in _dbContext.Cargos on p.CargoId equals c.Id
+                         where c.Id == Id
+                         select new CargoPessoa
+                         {
+                             Nome = p.Nome,
+                             Funcao = c.Funcao,
+                             SalarioBase = c.SalarioBase,
+                         }).ToList();
+            return (aluno);
+        }
+        //public IEnumerable<CargoPessoa> ObterTodosComCargos()
         //{
-        //    IEnumerable<Cargo> query = from p in _dbContext.Pessoas
-        //                               join c in _dbContext.Cargos on p.Id equals c.IdPessoa
-        //                               select (c);
 
-            //    return query;
+
         //}
         public TEntity ObterUnico(int? Id)
         {

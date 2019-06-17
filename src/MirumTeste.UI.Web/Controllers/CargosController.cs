@@ -13,20 +13,17 @@ namespace MirumTeste.UI.Web.Controllers
     public class CargosController : Controller
     {
         private readonly ICargoServices _cargoService;
-
-        public CargosController(ICargoServices cargoService)
+        private readonly ICargoPessoaServices _cargoPessoaService;
+        public CargosController(ICargoServices cargoService, ICargoPessoaServices cargoPessoaServices)
         {
             _cargoService = cargoService;
+            _cargoPessoaService = cargoPessoaServices;
         }
+
         public IActionResult Index()
         {
             return View(_cargoService.ObterTodos());
         }
-
-        //public IActionResult Find()
-        //{
-        //    return View(_cargoService.Find(x => x.IdPessoa == 1));
-        //}
 
         public IActionResult Create()
         {
@@ -45,33 +42,28 @@ namespace MirumTeste.UI.Web.Controllers
             return View(cargo);
         }
 
-
-        // GET: Contatos/Edit/5
         public IActionResult Edit(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                ModelState.AddModelError("", "id não informado");
             }
 
-            var contato = _cargoService.ObterUnico(id);
-            if (contato == null)
+            var cargo = _cargoService.ObterUnico(id);
+            if (cargo == null)
             {
-                return NotFound();
+                ModelState.AddModelError("", "Cargo não encontrado");
             }
-            return View(contato);
+            return View(cargo);
         }
 
-        // POST: Contatos/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("Id, Funcao, SalarioBase")] Cargo cargo)
         {
             if (id != cargo.Id)
             {
-                return NotFound();
+                ModelState.AddModelError("", "Id não informado");
             }
 
             if (ModelState.IsValid)
@@ -82,9 +74,9 @@ namespace MirumTeste.UI.Web.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ContatoExists(cargo.Id))
+                    if (!CargoExists(cargo.Id))
                     {
-                        return NotFound();
+                        ModelState.AddModelError("", "Cargo não encontrado");
                     }
                     else
                     {
@@ -96,54 +88,48 @@ namespace MirumTeste.UI.Web.Controllers
             return View(cargo);
         }
 
-
-        // GET: Contatos/Details/5
         public IActionResult Details(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                ModelState.AddModelError("", "Id não informado");
             }
 
-            var contato = _cargoService.ObterUnico(id);
-            if (contato == null)
+            var cargo = _cargoService.ObterUnico(id);
+            if (cargo == null)
             {
-                return NotFound();
+                ModelState.AddModelError("", "Cargo não encontrado");
             }
 
-            return View(contato);
+            return View(cargo);
         }
 
-
-        // GET: Contatos/Delete/5
         public IActionResult Delete(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                ModelState.AddModelError("", "Id não informado");
             }
 
-            var contato = _cargoService.ObterUnico(id);
-            if (contato == null)
+            var cargo = _cargoService.ObterUnico(id);
+            if (cargo == null)
             {
-                return NotFound();
+                ModelState.AddModelError("", "Cargo não encontrado");
             }
 
-            return View(contato);
+            return View(cargo);
         }
 
-        // POST: Contatos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            var contato = _cargoService.ObterUnico(id);
-            _cargoService.Remover(contato);
+            var cargo = _cargoService.ObterUnico(id);
+            _cargoService.Remover(cargo);
             return RedirectToAction(nameof(Index));
         }
 
-
-        private bool ContatoExists(int id)
+        private bool CargoExists(int id)
         {
             return _cargoService.ObterUnico(id) != null;
         }

@@ -48,6 +48,8 @@ namespace MirumTeste.UI.Web
             services.AddScoped<ICargoRepository, CargoRepository>();
             services.AddScoped<IPessoaServices, PessoasServices>();
             services.AddScoped<ICargoServices, CargosServices>();
+            services.AddScoped<ICargoPessoaRepository, CargoPessoaRepository>();
+            services.AddScoped<ICargoPessoaServices, CargosPessoasServices>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

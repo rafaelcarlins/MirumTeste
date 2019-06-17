@@ -1,4 +1,4 @@
-﻿@model MirumTeste.ApplicationCore.Entity.Pessoa
+﻿@model  MirumTeste.ApplicationCore.Entity.Pessoa
 
 @{
     ViewData["Title"] = "Create";
@@ -28,23 +28,13 @@
             </div>
 
             <div class="form-group">
-
-                @*@Html.LabelFor(m => m.Cargos)
-                @Html.DropDownListFor(m => m.Cargos, // 1. Store selected value in Model.State;
-                                                    // when page is rendered after postback,
-                                                    // take selected value from Model.State.
-
-                                      // 2. Take list of values from Model.States
-                                      Model.Cargos,
-
-                                      // 3. Text for the first 'default' option
-                                      "- Please select a state -",
-
-                                      //4. A class name to assign to <select> tag
-                                      new { @class = "form-control" })*@
-                @*<select asp-for="Cargos" asp-items="@Model.Cargos">
-            <option>Please select one</option>
-        </select>*@
+                <label asp-for="Cargos" class="control-label"></label><br />
+                <select asp-for="CargoId">
+                    @foreach (var item in @ViewBag.Cargos)
+                    {
+                        <option value="@item.Id">@item.Funcao</option>
+                    }
+                </select>
             </div>
 
             <div class="form-group">

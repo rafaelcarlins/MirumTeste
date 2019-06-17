@@ -4,15 +4,11 @@ using System.Text;
 
 namespace MirumTeste.ApplicationCore.Entity
 {
-    public class Cargo
+    public class CargoPessoa
     {
-        public Cargo()
-        {
-
-        }
-
-        public int Id { get; set; }
+        public string Nome { get; set; }
         public string Funcao { get; set; }
         public decimal SalarioBase { get; set; }
+
     }
 }

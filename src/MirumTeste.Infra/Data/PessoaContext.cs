@@ -32,9 +32,9 @@ namespace MirumTeste.Infra.Data
                 .HasColumnType("varchar(30)");
 
 
-            modelBuilder.Entity<Menu>()
-                .HasMany(c => c.subMenu)
-                .WithOne();
+            //modelBuilder.Entity<Menu>()
+            //    .HasMany(c => c.subMenu)
+            //    .WithOne();
 
         }
     }

@@ -15,36 +15,35 @@ namespace MirumTeste.UI.Web.Controllers
     public class PessoasController : Controller
     {
         private readonly IPessoaServices _pessoaService;
+        private readonly ICargoServices _cargoService;
+        private readonly ICargoPessoaServices _cargoPessoaService;
 
-        public PessoasController(IPessoaServices pessoaService)
+        public PessoasController(IPessoaServices pessoaService, ICargoServices cargoService, ICargoPessoaServices cargoPessoaService)
         {
             _pessoaService = pessoaService;
+            _cargoService = cargoService;
+            _cargoPessoaService = cargoPessoaService;
         }
+
+        public IActionResult List()
+        {
+            return View(_cargoPessoaService.ObterTodosComCargos());
+        }
+
         public IActionResult Index()
         {
 
-            _pessoaService.ObterTodos();
-
-            //foreach (Cargo element in _pessoaService.ObterTodos())
-            //{
-            //    var selectList = new List<SelectListItem>();
-            //    selectList.Add(new SelectListItem
-            //    {
-            //        Value = element.Cargos.ToString(),
-            //        Text = element.Cargos.ToString()
-            //    });
-            //}
-
-            return View();
+            ViewData["Cargos"] = _cargoPessoaService.ObterTodosComCargos();
+            return View(_pessoaService.ObterTodos());
         }
-        
         public IActionResult Create()
         {
+            ViewData["Cargos"] = _cargoService.ObterTodos();
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Nome,Rg,Email")] Pessoa pessoa)
+        public IActionResult Create([Bind("Nome,Rg,Email, CargoId")] Pessoa pessoa)
         {
             if (ModelState.IsValid)
             {
@@ -54,29 +53,25 @@ namespace MirumTeste.UI.Web.Controllers
             return View(pessoa);
         }
 
-
-        // GET: Contatos/Edit/5
         public IActionResult Edit(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                ModelState.AddModelError("", "Id não informado");
             }
 
-            var contato = _pessoaService.ObterUnico(id);
-            if (contato == null)
+            var cargo = _pessoaService.ObterUnico(id);
+            if (cargo == null)
             {
-                return NotFound();
+                ModelState.AddModelError("", "Pessoa não encontrada");
             }
-            return View(contato);
+            ViewData["Cargos"] = _cargoService.ObterTodos();
+            return View(cargo);
         }
 
-        // POST: Contatos/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("Id, Nome, Rg, Email")] Pessoa pessoa)
+        public IActionResult Edit(int id, [Bind("Id, Nome, Rg, Email, CargoId")] Pessoa pessoa)
         {
             if (id != pessoa.Id)
             {
@@ -91,9 +86,9 @@ namespace MirumTeste.UI.Web.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ContatoExists(pessoa.Id))
+                    if (!cargoExists(pessoa.Id))
                     {
-                        return NotFound();
+                        ModelState.AddModelError("", "Pessoa não encontrada");
                     }
                     else
                     {
@@ -105,54 +100,48 @@ namespace MirumTeste.UI.Web.Controllers
             return View(pessoa);
         }
 
-
-        // GET: Contatos/Details/5
         public IActionResult Details(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                ModelState.AddModelError("", "Id não informado");
             }
 
-            var contato = _pessoaService.ObterUnico(id);
-            if (contato == null)
+            var cargo = _pessoaService.ObterUnico(id);
+            if (cargo == null)
             {
-                return NotFound();
+                ModelState.AddModelError("", "Pessoa não encontrada");
             }
 
-            return View(contato);
+            return View(cargo);
         }
 
-
-        // GET: Contatos/Delete/5
         public IActionResult Delete(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                ModelState.AddModelError("", "Id não informado");
             }
 
-            var contato = _pessoaService.ObterUnico(id);
-            if (contato == null)
+            var cargo = _pessoaService.ObterUnico(id);
+            if (cargo == null)
             {
-                return NotFound();
+                ModelState.AddModelError("", "Pessoa não encontrada");
             }
 
-            return View(contato);
+            return View(cargo);
         }
 
-        // POST: Contatos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            var contato = _pessoaService.ObterUnico(id);
-            _pessoaService.Remover(contato);
+            var cargo = _pessoaService.ObterUnico(id);
+            _pessoaService.Remover(cargo);
             return RedirectToAction(nameof(Index));
         }
 
-
-        private bool ContatoExists(int id)
+        private bool cargoExists(int id)
         {
             return _pessoaService.ObterUnico(id) != null;
         }

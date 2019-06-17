@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using MirumTeste.ApplicationCore.Entity;
 using MirumTeste.ApplicationCore.Interface;
@@ -24,6 +25,11 @@ namespace MirumTeste.ApplicationCore.Services
         public void Atualizar(Pessoa entity)
         {
             _repository.Atualizar(entity);
+        }
+
+        public IEnumerable<Pessoa> Find(Expression<Func<Pessoa, bool>> predicate)
+        {
+            throw new NotImplementedException();
         }
 
         public IEnumerable<Pessoa> ObterTodos()
